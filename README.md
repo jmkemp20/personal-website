@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## TODO
+
+- [ ] Fix theme and help button tap targets on mobile (top-right buttons just dont do anything on mobile)
+- [ ] Navigation tabs could look like zsh-style windows with numbered labels (1, 2, 3, etc.)
+
 ## Getting Started
 
 First, run the development server:
