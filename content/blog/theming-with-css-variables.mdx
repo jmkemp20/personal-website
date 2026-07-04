@@ -1,0 +1,48 @@
+export const metadata = {
+  title: "Theming with CSS variables and color-mix()",
+  date: "2026-03-20",
+  description:
+    "How to ship a dozen themes while only ever defining three colors per palette.",
+  tags: ["css", "web", "design"],
+};
+
+Every theme on this site defines exactly three colors: a background, a
+foreground, and an accent. That's it. Everything else is computed.
+
+## The trick
+
+Declare your derived tones **once**, in terms of the three base variables:
+
+```css
+:root {
+  --dim: color-mix(in srgb, var(--fg) 58%, var(--bg));
+  --border: color-mix(in srgb, var(--fg) 20%, var(--bg));
+  --panel: color-mix(in srgb, var(--fg) 5%, var(--bg));
+}
+```
+
+Because `color-mix()` resolves at _use_ time against the element's current
+custom properties, swapping `--fg` and `--bg` per theme automatically
+recomputes every derived tone. No duplication.
+
+## Switching without a flash
+
+The one gotcha is the flash of the default theme before hydration. A tiny
+synchronous script in `<head>` fixes it:
+
+```js
+(function () {
+  try {
+    var t = localStorage.getItem("jk.theme");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+```
+
+It runs before the first paint, so the saved palette is already applied when the
+page appears.
+
+## Result
+
+Seven themes, one rule set, zero flash. Hit <kbd>t</kbd> and try them all — then
+read more in [hello, terminal](/blog/hello-terminal).

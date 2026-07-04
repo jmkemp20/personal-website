@@ -1,0 +1,45 @@
+export const metadata = {
+  title: "Hello, terminal",
+  date: "2026-06-15",
+  description:
+    "Why I rebuilt my personal site as a terminal UI — and what I learned making it keyboard-first.",
+  tags: ["meta", "web", "design"],
+};
+
+Welcome to the first post on the new site. It's a **terminal**, sort of. You
+navigate it with your mouse or entirely from the keyboard, there are no commands
+to memorize, and you can repaint the whole thing with a single keystroke.
+
+## Why a TUI?
+
+I spend most of my day in a shell, and there's a certain calm to monospace text,
+tight contrast, and a blinking cursor. I wanted the site to feel like _home_.
+
+> The best interface is the one that gets out of your way.
+
+## What's under the hood
+
+- **Next.js** with the App Router for routing and rendering
+- **MDX** so posts like this one are just markdown files
+- **CSS variables** for instant, flash-free theme switching
+
+Here's the entire theme model, more or less:
+
+```css
+:root[data-theme="dracula"] {
+  --bg: #282a36;
+  --fg: #f8f8f2;
+  --accent: #bd93f9;
+}
+```
+
+Everything else — borders, muted text, subtle panels — is derived from those
+three colors with `color-mix()`.
+
+## Try it
+
+Press <kbd>t</kbd> to open the theme switcher, or <kbd>?</kbd> to see every
+shortcut. Then head back to the [blog index](/blog) or poke around the
+[projects](/projects).
+
+Thanks for reading. More soon.

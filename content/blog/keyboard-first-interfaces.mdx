@@ -1,0 +1,41 @@
+export const metadata = {
+  title: "Designing keyboard-first interfaces",
+  date: "2026-05-02",
+  description:
+    "A few patterns for building UIs that feel great with a keyboard without alienating people who prefer a mouse.",
+  tags: ["a11y", "ux", "web"],
+};
+
+Keyboard-first doesn't mean keyboard-only. The goal is an interface that rewards
+power users **without** punishing everyone else. Here are the patterns I lean on.
+
+## Roving tabindex
+
+For a list you navigate with arrow keys, only one item should be in the tab
+order at a time. Focus moves with <kbd>↑</kbd>/<kbd>↓</kbd> (or <kbd>j</kbd>/
+<kbd>k</kbd>), while <kbd>Tab</kbd> jumps past the whole group.
+
+| Key           | Action              |
+| ------------- | ------------------- |
+| `j` / `↓`     | next item           |
+| `k` / `↑`     | previous item       |
+| `Enter`       | activate            |
+| `Esc`         | close / cancel      |
+
+## Make everything a real element
+
+The cheapest accessibility win is boring: use real `<a>` and `<button>`
+elements. You get focus, activation, and semantics for free, then layer arrow
+keys on top.
+
+## Always show the map
+
+A small hint bar or a `?` overlay means people never have to guess. Discover-
+ability is the whole game.
+
+- Announce shortcuts where they're used
+- Respect `prefers-reduced-motion`
+- Never trap focus without an escape hatch
+
+Related reading: the [hello, terminal](/blog/hello-terminal) post covers how
+this site puts these ideas together.
