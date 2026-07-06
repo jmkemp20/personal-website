@@ -8,7 +8,7 @@ const LINES = [
   "joshua_kemp // terminal v4.0.4",
   "",
   "[ ok ] mounting /home/joshua",
-  "[ ok ] loading color themes (7)",
+  "[ ok ] loading color themes (12)",
   "[ ok ] initializing keyboard nav",
   "[ ok ] starting interactive shell",
   "",

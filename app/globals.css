@@ -52,6 +52,36 @@
   --accent: #268bd2;
 }
 
+[data-theme="rose-pine"] {
+  --bg: #191724;
+  --fg: #e0def4;
+  --accent: #ebbcba;
+}
+
+[data-theme="everforest"] {
+  --bg: #2d353b;
+  --fg: #d3c6aa;
+  --accent: #a7c080;
+}
+
+[data-theme="one-dark"] {
+  --bg: #282c34;
+  --fg: #abb2bf;
+  --accent: #61afef;
+}
+
+[data-theme="kanagawa"] {
+  --bg: #1f1f28;
+  --fg: #dcd7ba;
+  --accent: #7e9cd8;
+}
+
+[data-theme="synthwave"] {
+  --bg: #241b2f;
+  --fg: #f8f8f2;
+  --accent: #ff7edb;
+}
+
 /* Derived tones — declared once, recomputed per theme because they
  * reference --fg / --bg which change with `data-theme`. */
 :root {
@@ -86,7 +116,8 @@ html {
   scrollbar-color: var(--border) transparent;
 }
 
-[data-theme="solarized"] {
+[data-theme="solarized"],
+[data-theme="github-light"] {
   color-scheme: light;
 }
 

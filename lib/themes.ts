@@ -5,7 +5,13 @@ export type ThemeId =
   | "nord"
   | "catppuccin"
   | "matrix"
-  | "solarized";
+  | "solarized"
+  | "rose-pine"
+  | "everforest"
+  | "one-dark"
+  | "kanagawa"
+  | "synthwave"
+  | "github-light";
 
 export type Theme = {
   id: ThemeId;
@@ -59,6 +65,36 @@ export const THEMES: Theme[] = [
     label: "Solarized Light",
     blurb: "the one light theme",
     swatch: { bg: "#fdf6e3", fg: "#586e75", accent: "#268bd2" },
+  },
+  {
+    id: "rose-pine",
+    label: "Rosé Pine",
+    blurb: "soho vibes, dusty rose",
+    swatch: { bg: "#191724", fg: "#e0def4", accent: "#ebbcba" },
+  },
+  {
+    id: "everforest",
+    label: "Everforest",
+    blurb: "mossy green comfort",
+    swatch: { bg: "#2d353b", fg: "#d3c6aa", accent: "#a7c080" },
+  },
+  {
+    id: "one-dark",
+    label: "One Dark",
+    blurb: "the atom classic",
+    swatch: { bg: "#282c34", fg: "#abb2bf", accent: "#61afef" },
+  },
+  {
+    id: "kanagawa",
+    label: "Kanagawa",
+    blurb: "ink-wash wave blue",
+    swatch: { bg: "#1f1f28", fg: "#dcd7ba", accent: "#7e9cd8" },
+  },
+  {
+    id: "synthwave",
+    label: "Synthwave '84",
+    blurb: "neon retrowave pink",
+    swatch: { bg: "#241b2f", fg: "#f8f8f2", accent: "#ff7edb" },
   },
 ];
 
