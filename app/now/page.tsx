@@ -9,10 +9,30 @@ export const metadata: Metadata = {
 };
 
 const FOCUS = [
-  { glyph: "🚧", text: "[stub: the main project I'm building right now]" },
-  { glyph: "📚", text: "[stub: something I'm learning or reading]" },
-  { glyph: "✍️", text: "[stub: writing I'm working on for the blog]" },
-  { glyph: "🌱", text: "[stub: a habit or side-quest I'm nurturing]" },
+  {
+    glyph: "🛳️",
+    text: "Engineering project lead on Odyssey Mission at HII Unmanned Systems — a command and control interface for ROMULUS USVs and REMUS UUVs. Spring Boot backend, React frontend.",
+  },
+  {
+    glyph: "📱",
+    text: "Building SnapStitch on the side — a React Native puzzle game where you reassemble photos from your camera roll. Rebuild your memories.",
+  },
+  {
+    glyph: "💼",
+    text: "Expanding freelance work: AI evaluation and picking up small business web clients.",
+  },
+  {
+    glyph: "📖",
+    text: "Studying for the PMP and working through algorithm and data structure problems on LeetCode.",
+  },
+  {
+    glyph: "🏠",
+    text: "Building out a home server. Moved off Google Photos, self-hosting media, and getting into Home Assistant.",
+  },
+  {
+    glyph: "👟",
+    text: "Navigating the newborn stage and still getting runs in. Have two 5Ks on the calendar for August.",
+  },
 ];
 
 export default function NowPage() {
@@ -26,7 +46,7 @@ export default function NowPage() {
           <span className="text-accent">#</span> now
         </h1>
         <p className="max-w-2xl leading-7 text-dim">
-          A snapshot of what has my attention. This is a{" "}
+          A snapshot of what has my attention right now, and for the foreseeable future. Welcome to my{" "}
           <a
             href="https://nownownow.com/about"
             target="_blank"
@@ -37,7 +57,7 @@ export default function NowPage() {
           </a>
           .
         </p>
-        <p className="text-xs text-muted">last updated: [stub: month year]</p>
+        <p className="text-xs text-muted">last updated: July 2026</p>
       </header>
 
       <ul className="max-w-2xl space-y-4">

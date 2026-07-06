@@ -147,6 +147,18 @@ a.link:hover {
   text-underline-offset: 4px;
 }
 
+/* External prose links: accent color at rest, dimmed accent on hover/focus.
+ * Kept unlayered (like `a.link:hover` above) so it beats the unlayered
+ * `a { color: inherit }` reset — Tailwind's `text-accent`/`hover:text-accent`
+ * utilities live in `@layer utilities` and would otherwise lose that reset. */
+a.external-link {
+  color: inherit;
+}
+a.external-link:hover,
+a.external-link:focus-visible {
+  color: color-mix(in srgb, var(--accent) 80%, transparent);
+}
+
 /* Blinking block cursor */
 @keyframes term-blink {
   0%,
