@@ -2,12 +2,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## TODO
 
-- [ ] Fix theme and help button tap targets on mobile (top-right buttons just dont do anything on mobile)
 - [ ] Navigation tabs could look like zsh-style windows with numbered labels (1, 2, 3, etc.)
-- [ ] Make bootloader take just a bit longer to load so that the user can read the bootloader text before the terminal loads
 - [ ] bottom right where the helpers are we can put when the site was last updated (like a git commit hash / vercel or something) - think monkeytype?
 - [ ] Allow `/` to be an extra shortcut for `?` (help) so that users can just hit `/` to get help and `?` to get help as well
-- [ ] 
 
 ## Getting Started
 

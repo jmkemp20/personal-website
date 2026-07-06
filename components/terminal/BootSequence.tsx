@@ -1,23 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-
-const BOOT_KEY = "jk.booted";
-
-const LINES = [
-  "joshua_kemp // terminal v4.0.4",
-  "",
-  "[ ok ] mounting /home/joshua",
-  "[ ok ] loading color themes (12)",
-  "[ ok ] initializing keyboard nav",
-  "[ ok ] starting interactive shell",
-  "",
-  "welcome — press ? anytime for keys.",
-];
+import { BOOT_LINES, BOOT_STORAGE_KEY } from "@/lib/boot";
 
 type Phase = "idle" | "running" | "closing" | "done";
 
 export function BootSequence() {
+  // Always start "idle" so the server and first client render agree (no
+  // hydration mismatch). The pre-hydration script in `app/layout.tsx` paints
+  // a full-screen backdrop via `<html data-booting>` CSS, so nothing flashes
+  // during the brief moment before the effect below promotes us to "running".
   const [phase, setPhase] = useState<Phase>("idle");
   const [count, setCount] = useState(0);
   const finished = useRef(false);
@@ -26,37 +18,34 @@ export function BootSequence() {
     if (finished.current) return;
     finished.current = true;
     try {
-      sessionStorage.setItem(BOOT_KEY, "1");
+      sessionStorage.setItem(BOOT_STORAGE_KEY, "1");
     } catch {
       // ignore
     }
     setPhase("closing");
   }, []);
 
-  // Decide whether to play the boot animation at all.
+  // Decide, right after hydration, whether to play the animation. The source
+  // of truth is the `data-booting` attribute the pre-hydration script already
+  // set (it accounts for sessionStorage + reduced-motion). If present, run the
+  // animation; otherwise stay idle and render nothing.
   useEffect(() => {
-    let alreadyBooted = false;
+    const shouldBoot =
+      document.documentElement.getAttribute("data-booting") === "1";
+    if (!shouldBoot) return;
+
+    // We now own the boot screen. Persist the flag so a mid-animation reload
+    // does not replay it, but keep the attribute (and thus the CSS backdrop)
+    // until the very end to avoid any gap between backdrop and overlay.
     try {
-      alreadyBooted = sessionStorage.getItem(BOOT_KEY) === "1";
+      sessionStorage.setItem(BOOT_STORAGE_KEY, "1");
     } catch {
       // ignore
     }
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
 
-    if (alreadyBooted || reduceMotion) {
-      try {
-        sessionStorage.setItem(BOOT_KEY, "1");
-      } catch {
-        // ignore
-      }
-      // Stay in the "idle" phase, which renders nothing.
-      return;
-    }
-
-    // Kick off on the next frame so the state change happens outside the
-    // effect body (avoids a synchronous cascading render on mount).
+    // Promote on the next frame rather than synchronously in the effect body
+    // (avoids a cascading render). The CSS backdrop stays up during this frame,
+    // so there is still no flash of content.
     const raf = requestAnimationFrame(() => setPhase("running"));
     return () => cancelAnimationFrame(raf);
   }, []);
@@ -64,17 +53,21 @@ export function BootSequence() {
   // Reveal lines one at a time, then finish.
   useEffect(() => {
     if (phase !== "running") return;
-    if (count >= LINES.length) {
+    if (count >= BOOT_LINES.length) {
       const timer = setTimeout(finish, 520);
       return () => clearTimeout(timer);
     }
-    const timer = setTimeout(() => setCount((c) => c + 1), count === 0 ? 140 : 150);
+    const timer = setTimeout(
+      () => setCount((c) => c + 1),
+      count === 0 ? 140 : 150,
+    );
     return () => clearTimeout(timer);
   }, [phase, count, finish]);
 
-  // Fade out, then unmount.
+  // Fade out, drop the pre-hydration backdrop, then unmount.
   useEffect(() => {
     if (phase !== "closing") return;
+    document.documentElement.removeAttribute("data-booting");
     const timer = setTimeout(() => setPhase("done"), 320);
     return () => clearTimeout(timer);
   }, [phase]);
@@ -101,7 +94,7 @@ export function BootSequence() {
       }`}
     >
       <pre className="w-full max-w-md px-6 text-sm leading-6">
-        {LINES.slice(0, count).map((line, index) => (
+        {BOOT_LINES.slice(0, count).map((line, index) => (
           <div key={index}>
             {line.startsWith("[ ok ]") ? (
               <>
@@ -113,7 +106,9 @@ export function BootSequence() {
             )}
           </div>
         ))}
-        {count < LINES.length ? <span className="term-cursor" aria-hidden /> : null}
+        {count < BOOT_LINES.length ? (
+          <span className="term-cursor" aria-hidden />
+        ) : null}
       </pre>
     </div>
   );

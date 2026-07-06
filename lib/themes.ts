@@ -10,8 +10,7 @@ export type ThemeId =
   | "everforest"
   | "one-dark"
   | "kanagawa"
-  | "synthwave"
-  | "github-light";
+  | "synthwave";
 
 export type Theme = {
   id: ThemeId;

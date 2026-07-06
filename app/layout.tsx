@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { TerminalChrome } from "@/components/terminal/TerminalChrome";
 import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/themes";
+import { BOOT_STORAGE_KEY } from "@/lib/boot";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -33,6 +34,17 @@ const themeInitScript = `(function(){try{var t=localStorage.getItem(${JSON.strin
   THEME_STORAGE_KEY,
 )});if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`;
 
+// Also runs before first paint: decides whether the boot animation should
+// play this session and, if so, marks <html data-booting> so CSS can cover
+// the app with the boot backdrop from the very first frame. Without this the
+// real content paints first and the overlay only appears after hydration,
+// causing a visible flash of content -> boot -> content.
+const bootInitScript = `(function(){try{var booted=sessionStorage.getItem(${JSON.stringify(
+  BOOT_STORAGE_KEY,
+)})==='1';var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(booted||reduce){sessionStorage.setItem(${JSON.stringify(
+  BOOT_STORAGE_KEY,
+)},'1');}else{document.documentElement.setAttribute('data-booting','1');}}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,6 +59,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: bootInitScript }} />
       </head>
       <body className="min-h-full flex flex-col bg-bg text-fg font-mono">
         <ThemeProvider>

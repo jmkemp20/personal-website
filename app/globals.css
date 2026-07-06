@@ -116,8 +116,7 @@ html {
   scrollbar-color: var(--border) transparent;
 }
 
-[data-theme="solarized"],
-[data-theme="github-light"] {
+[data-theme="solarized"] {
   color-scheme: light;
 }
 
@@ -128,6 +127,28 @@ body {
   font-feature-settings: "liga" 1, "calt" 1;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Boot backdrop.
+ * A pre-hydration inline script (see app/layout.tsx) sets `data-booting` on
+ * <html> before first paint whenever the boot animation is going to play.
+ * This opaque, theme-colored, full-screen layer is painted immediately —
+ * before React hydrates — so the real page content never flashes through in
+ * the gap before the <BootSequence> overlay mounts. The overlay itself sits
+ * at z-100, just above this backdrop, so the handoff is seamless. */
+html[data-booting]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: var(--bg);
+}
+
+/* Prevent the content behind the backdrop from scrolling/interacting while
+ * the boot screen is up. */
+html[data-booting],
+html[data-booting] body {
+  overflow: hidden;
 }
 
 ::selection {
