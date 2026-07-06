@@ -63,6 +63,7 @@ export function TerminalChrome({ children }: { children: React.ReactNode }) {
             setHelpOpen(false);
             setThemeOpen((open) => !open);
             return;
+          case "/":
           case "?":
             event.preventDefault();
             setThemeOpen(false);
@@ -80,6 +81,17 @@ export function TerminalChrome({ children }: { children: React.ReactNode }) {
             (index + direction + SECTION_PATHS.length) % SECTION_PATHS.length;
           router.push(SECTION_PATHS[next]);
         };
+
+        // Number keys jump straight to a section by its index (matching the
+        // tmux-style "N:label" markers in the top nav: 0 = home, 1 = about…).
+        if (event.key >= "0" && event.key <= "9") {
+          const index = Number(event.key);
+          if (index < SECTION_PATHS.length) {
+            event.preventDefault();
+            router.push(SECTION_PATHS[index]);
+          }
+          return;
+        }
 
         // Up / down (and vim j/k) move through the page's nav items. Arrow
         // keys only engage once focus is already in a list (so ordinary

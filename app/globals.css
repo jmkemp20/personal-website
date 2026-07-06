@@ -114,6 +114,9 @@
 html {
   color-scheme: dark;
   scrollbar-color: var(--border) transparent;
+  /* Reserve the scrollbar gutter at all times so content never shifts
+   * horizontally when a vertical scrollbar appears/disappears between pages. */
+  scrollbar-gutter: stable;
 }
 
 [data-theme="solarized"] {

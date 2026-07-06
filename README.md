@@ -2,9 +2,14 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## TODO
 
-- [ ] Navigation tabs could look like zsh-style windows with numbered labels (1, 2, 3, etc.)
 - [ ] bottom right where the helpers are we can put when the site was last updated (like a git commit hash / vercel or something) - think monkeytype?
-- [ ] Allow `/` to be an extra shortcut for `?` (help) so that users can just hit `/` to get help and `?` to get help as well
+- [ ] Finish `/about` page
+- [ ] Finish `/projects` page
+- [ ] Blog post for ugreen nas immich
+- [ ] Blog post for pihole setup
+- [ ] Implement RSS
+- [ ] Update Github Links and email links
+- [ ] Update main whoami
 
 ## Getting Started
 

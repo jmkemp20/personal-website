@@ -6,7 +6,7 @@ export const SITE = {
   host: "kemp",
   role: "software engineer",
   tagline: "building things for the web, one commit at a time.",
-  url: "https://joshkemp.dev",
+  url: "https://joshuakemp.com",
 };
 
 /** Primary sections, in the order they appear on the home hub and top nav. */
@@ -53,14 +53,14 @@ export const SOCIALS: NavItem[] = [
     external: true,
   },
   {
-    href: "mailto:hello@joshkemp.dev",
+    href: "mailto:jkemp952@gmail.com", // "mailto:hello@joshuakemp.com",
     label: "email",
     glyph: "✉️",
     hint: "say hello",
     external: true,
   },
   {
-    href: "https://joshkemp.dev/rss.xml",
+    href: "https://joshuakemp.com/rss.xml",
     label: "rss",
     glyph: "📡",
     hint: "subscribe to the feed",
