@@ -132,6 +132,21 @@ a {
   text-decoration: none;
 }
 
+/* Dotted accent underline on hover for internal prose links.
+ * Applies to any internal link that opts in via the shared `.link` prose
+ * style. External links (target="_blank") are handled separately: they get
+ * an accent *color* on hover (see the footer/nav patterns) rather than an
+ * underline. This rule is intentionally unlayered so it wins over Tailwind's
+ * @layer utilities. Focus styling is left untouched so the :focus-visible
+ * outline above still applies. */
+a.link:hover {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+
 /* Blinking block cursor */
 @keyframes term-blink {
   0%,

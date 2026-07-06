@@ -2,14 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Prompt } from "@/components/terminal/Prompt";
 import { SITE } from "@/lib/site";
+import { link } from "@/lib/styles";
 
 export const metadata: Metadata = {
   title: "about",
   description: "whoami — a short introduction to Joshua Kemp.",
 };
-
-const link =
-  "text-accent underline decoration-border underline-offset-4 transition-colors hover:decoration-accent";
 
 export default function AboutPage() {
   return (

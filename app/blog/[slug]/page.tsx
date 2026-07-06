@@ -8,6 +8,7 @@ import {
   getPost,
   getPostSlugs,
 } from "@/lib/posts";
+import { link } from "@/lib/styles";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -104,10 +105,7 @@ export default async function PostPage({ params }: PageProps) {
       </nav>
 
       <div className="mt-8">
-        <Link
-          href="/blog"
-          className="text-sm text-accent underline decoration-border underline-offset-4 transition-colors hover:decoration-accent"
-        >
+        <Link href="/blog" className={`${link} text-sm`}>
           ← back to all posts
         </Link>
       </div>

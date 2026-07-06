@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Prompt } from "@/components/terminal/Prompt";
+import { externalLink, link } from "@/lib/styles";
 
 export const metadata: Metadata = {
   title: "now",
   description: "What Joshua Kemp is focused on at the moment.",
 };
-
-const link =
-  "text-accent underline decoration-border underline-offset-4 transition-colors hover:decoration-accent";
 
 const FOCUS = [
   { glyph: "🚧", text: "[stub: the main project I'm building right now]" },
@@ -33,7 +31,7 @@ export default function NowPage() {
             href="https://nownownow.com/about"
             target="_blank"
             rel="noopener noreferrer"
-            className={link}
+            className={externalLink}
           >
             /now page
           </a>

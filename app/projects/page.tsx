@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const linkClass =
-  "inline-flex items-center gap-1 rounded border border-border px-2 py-0.5 text-xs text-dim transition-colors hover:border-accent hover:text-accent focus-visible:border-accent focus-visible:text-accent";
+  "inline-flex items-center  gap-1 rounded border border-border px-2 py-0.5 text-xs text-dim transition-colors hover:border-accent hover:text-accent focus-visible:border-accent focus-visible:text-accent";
 
 function ProjectLinkTag({ href, label }: { href: string; label: string }) {
   const isInternal = href.startsWith("/");

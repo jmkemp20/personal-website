@@ -1,28 +1,37 @@
 import type { MDXComponents } from "mdx/types";
 import type { ComponentPropsWithoutRef } from "react";
 import Link from "next/link";
+import { externalLink, link } from "@/lib/styles";
 
 function MdxLink({ href = "", ...props }: ComponentPropsWithoutRef<"a">) {
   const isInternal = href.startsWith("/") || href.startsWith("#");
-  const className =
-    "text-accent underline decoration-border underline-offset-4 transition-colors hover:decoration-accent focus-visible:decoration-accent";
 
   if (isInternal) {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={link}>
         {props.children}
       </Link>
     );
   }
+
+  const { children, ...rest } = props;
 
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={className}
-      {...props}
-    />
+      className={`group ${externalLink}`}
+      {...rest}
+    >
+      {children}
+      <span
+        aria-hidden
+        className="ml-0.5 text-muted transition-colors group-hover:text-accent"
+      >
+        ↗
+      </span>
+    </a>
   );
 }
 

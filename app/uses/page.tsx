@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Prompt } from "@/components/terminal/Prompt";
+import { externalLink } from "@/lib/styles";
 
 export const metadata: Metadata = {
   title: "uses",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 type UsesGroup = {
   title: string;
   glyph: string;
-  items: { name: string; note: string }[];
+  items: { name: string; href?: string; note: string }[];
 };
 
 const GROUPS: UsesGroup[] = [
@@ -17,29 +18,117 @@ const GROUPS: UsesGroup[] = [
     title: "editor & terminal",
     glyph: "⌨️",
     items: [
-      { name: "[stub: editor]", note: "where the code happens" },
-      { name: "[stub: terminal]", note: "with a minimal, fast prompt" },
-      { name: "[stub: shell]", note: "plugins kept intentionally light" },
-      { name: "[stub: font]", note: "a crisp monospace with ligatures" },
+      {
+        name: "VS Code",
+        href: "https://code.visualstudio.com",
+        note: "daily driver editor",
+      },
+      {
+        name: "tmux",
+        href: "https://github.com/tmux/tmux",
+        note: "terminal multiplexer for persistent sessions",
+      },
+      {
+        name: "zsh",
+        href: "https://ohmyz.sh/",
+        note: "shell of choice",
+      },
+      {
+        name: "OpenCode",
+        href: "https://opencode.ai",
+        note: "AI coding agent in the terminal",
+      },
+      {
+        name: "GitHub Copilot CLI",
+        href: "https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line",
+        note: "AI assistance from the command line",
+      },
+      {
+        name: "Obsidian",
+        href: "https://obsidian.md",
+        note: "notes synced via personal NAS",
+      },
     ],
   },
   {
     title: "hardware",
     glyph: "🖥️",
     items: [
-      { name: "[stub: laptop]", note: "daily driver" },
-      { name: "[stub: display]", note: "for the extra pixels" },
-      { name: "[stub: keyboard]", note: "clacky and mechanical" },
-      { name: "[stub: audio]", note: "focus mode essentials" },
+      {
+        name: "Samsung G5 Ultrawide",
+        href: "https://www.samsung.com/us/monitors/gaming/34-inch-g5-odyssey-gaming-monitor-with-1000r-curved-screen-sku-lc34g55twwnxza/",
+        note: "primary display",
+      },
+      {
+        name: "NVIDIA GeForce RTX 3070 Ti",
+        href: "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3070-3070ti/",
+        note: "GPU",
+      },
+      {
+        name: "Corsair Peripherals",
+        href: "https://www.corsair.com",
+        note: "keyboard and mouse",
+      },
+      {
+        name: "Beyerdynamic DT 990 Pro",
+        href: "https://north-america.beyerdynamic.com/dt-990-pro.html",
+        note: "open-back headphones for focus",
+      },
+      {
+        name: "HyperX QuadCast 2",
+        href: "https://hyperx.com/products/hyperx-quadcast-2-usb-microphone",
+        note: "USB condenser microphone",
+      },
+      {
+        name: "UGREEN NASync DXP2800",
+        href: "https://nas.ugreen.com/products/ugreen-nasync-dxp2800-nas-storage",
+        note: "personal NAS",
+      },
     ],
   },
   {
     title: "stack & services",
     glyph: "🧰",
     items: [
-      { name: "[stub: framework]", note: "for building the web" },
-      { name: "[stub: hosting]", note: "deploy on push" },
-      { name: "[stub: notes]", note: "second brain" },
+      {
+        name: "Next.js",
+        href: "https://nextjs.org",
+        note: "go-to for personal web projects",
+      },
+      {
+        name: "React Native w/ Expo",
+        href: "https://expo.dev",
+        note: "go-to for personal mobile projects",
+      },
+      {
+        name: "Spring Boot",
+        href: "https://spring.io/projects/spring-boot",
+        note: "primary backend at work",
+      },
+      {
+        name: "React + TypeScript",
+        href: "https://react.dev",
+        note: "primary frontend at work",
+      },
+      {
+        name: "Vercel",
+        href: "https://vercel.com",
+        note: "hosting for Next.js projects",
+      },
+      {
+        name: "Netlify",
+        href: "https://netlify.com",
+        note: "hosting for static personal projects",
+      },
+      {
+        name: "Docker",
+        href: "https://www.docker.com",
+        note: "containers for self-hosted services",
+      },
+      {
+        name: "Action Items (self-built)",
+        note: "personal task tracker, self-hosted",
+      },
     ],
   },
 ];
@@ -56,8 +145,15 @@ export default function UsesPage() {
         </h1>
         <p className="max-w-2xl leading-7 text-dim">
           A living list of the tools I reach for. Inspired by{" "}
-          <span className="text-fg">uses.tech</span> — stubbed for now, real
-          picks coming soon.
+          <a
+            href="https://uses.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={externalLink}
+          >
+            uses.tech
+          </a>
+          .
         </p>
       </header>
 
@@ -74,7 +170,20 @@ export default function UsesPage() {
             <ul className="space-y-3">
               {group.items.map((item) => (
                 <li key={item.name} className="space-y-0.5">
-                  <p className="font-semibold text-fg">{item.name}</p>
+                  <p className="font-semibold text-fg">
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={externalLink}
+                      >
+                        {item.name}
+                      </a>
+                    ) : (
+                      item.name
+                    )}
+                  </p>
                   <p className="text-sm text-muted">{item.note}</p>
                 </li>
               ))}
