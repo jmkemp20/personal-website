@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["192.168.1.100"],
   // Allow .md / .mdx files to be treated as pages and imports.
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 };

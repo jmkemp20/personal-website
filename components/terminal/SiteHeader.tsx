@@ -100,7 +100,7 @@ export function SiteHeader({
         {/* tmux-style current-window indicator, pinned to the far right and
             never part of the scrollable window list. */}
         <span
-          className="flex shrink-0 items-center self-center rounded-md bg-panel px-2 py-1 text-sm tabular-nums text-dim"
+          className="hidden shrink-0 items-center self-center rounded-md bg-panel px-2 py-1 text-sm tabular-nums text-dim sm:flex"
           aria-hidden
         >
           [<span className="text-accent">{activeIndex}</span>]
